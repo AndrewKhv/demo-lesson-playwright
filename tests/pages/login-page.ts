@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test'
+import { expect, Locator, Page } from '@playwright/test'
 import { OrderPage } from './order-page'
 import { SERVICE_URL } from '../../config/env-data'
 
@@ -8,14 +8,12 @@ export class LoginPage {
   readonly signInButton: Locator
   readonly usernameField: Locator
   readonly passwordField: Locator
-  // add more locators here
 
   constructor(page: Page) {
     this.page = page
     this.signInButton = page.getByTestId('signIn-button')
     this.usernameField = page.getByTestId('username-input')
     this.passwordField = page.getByTestId('password-input')
-    // continue with the rest of the implementation below
   }
 
   async open() {
@@ -28,6 +26,10 @@ export class LoginPage {
     await this.signInButton.click()
     return new OrderPage(this.page)
   }
-
-  // continue with the rest of the implementation below
+  
+  async checkInnerComponents(): Promise<void> {
+    await expect(this.usernameField).toBeVisible()
+    await expect(this.passwordField).toBeVisible()
+    await expect(this.signInButton).toBeVisible()
+  }
 }
