@@ -35,10 +35,11 @@ export class LoginPage {
     await expect(this.signInButton).toBeVisible()
   }
 
-  async checkValidationError(): Promise<void> { // Пример обхода нескольких одинковых элементов
-    await this.usernameField.fill('2');
-    await this.passwordField.fill('2');
-    await expect(this.valError.nth(0)).toBeVisible();
+  async checkValidationError(): Promise<void> {
+    // Пример обхода нескольких одинковых элементов
+    await this.usernameField.fill('2')
+    await this.passwordField.fill('2')
+    await expect(this.valError.nth(0)).toBeVisible()
     await expect(this.valError.nth(1)).toBeVisible()
   }
 }
