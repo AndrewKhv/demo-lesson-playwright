@@ -26,7 +26,7 @@ export class LoginPage {
     await this.signInButton.click()
     return new OrderPage(this.page)
   }
-  
+
   async checkInnerComponents(): Promise<void> {
     await expect(this.usernameField).toBeVisible()
     await expect(this.passwordField).toBeVisible()

@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test'
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker'
 
 export class OrderPage {
   readonly page: Page

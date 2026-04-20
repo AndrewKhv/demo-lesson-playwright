@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker'
 test('Login test + order page components check', async ({ page }) => {
   const loginPage = new LoginPage(page)
   await loginPage.open()
-  const orderPage = await loginPage.signIn(USERNAME, PASSWORD);
+  const orderPage = await loginPage.signIn(USERNAME, PASSWORD)
   await orderPage.checkInnerComponents()
 })
 
@@ -14,7 +14,7 @@ test('Create order test', async ({ page }) => {
   const loginPage = new LoginPage(page)
   await loginPage.open()
   const orderPage = await loginPage.signIn(USERNAME, PASSWORD)
-  await orderPage.createOrder();
+  await orderPage.createOrder()
 })
 
 test('Validation test on order creation', async ({ page }) => {
@@ -24,11 +24,11 @@ test('Validation test on order creation', async ({ page }) => {
 
   await orderPage.nameInput.fill('1')
   await orderPage.phoneInput.fill(faker.phone.number())
-  await orderPage.checkCreateOrderBtnEnabled(false);
+  await orderPage.checkCreateOrderBtnEnabled(false)
 
-  await orderPage.nameInput.fill(faker.person.firstName());
-  await orderPage.phoneInput.fill('2');
-  await orderPage.checkCreateOrderBtnEnabled(false);
+  await orderPage.nameInput.fill(faker.person.firstName())
+  await orderPage.phoneInput.fill('2')
+  await orderPage.checkCreateOrderBtnEnabled(false)
 
   await orderPage.nameInput.fill(faker.person.firstName())
   await orderPage.phoneInput.fill(faker.phone.number())
@@ -39,6 +39,6 @@ test('Logout test', async ({ page }) => {
   const loginPage = new LoginPage(page)
   await loginPage.open()
   const orderPage = await loginPage.signIn(USERNAME, PASSWORD)
-  await orderPage.logoutButton.click();
-  await loginPage.checkInnerComponents();
+  await orderPage.logoutButton.click()
+  await loginPage.checkInnerComponents()
 })
