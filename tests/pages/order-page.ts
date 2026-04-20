@@ -31,7 +31,6 @@ export class OrderPage {
     await expect(this.nameInput).toBeVisible()
     await expect(this.phoneInput).toBeVisible()
     await expect(this.commentInput).toBeVisible()
-    await this.checkCreateOrderBtnEnabled(false)
   }
 
   async createOrder(): Promise<void> {

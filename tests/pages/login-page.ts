@@ -8,12 +8,14 @@ export class LoginPage {
   readonly signInButton: Locator
   readonly usernameField: Locator
   readonly passwordField: Locator
+  readonly valError: Locator
 
   constructor(page: Page) {
     this.page = page
     this.signInButton = page.getByTestId('signIn-button')
     this.usernameField = page.getByTestId('username-input')
     this.passwordField = page.getByTestId('password-input')
+    this.valError = page.getByTestId('username-input-error')
   }
 
   async open() {
@@ -31,5 +33,12 @@ export class LoginPage {
     await expect(this.usernameField).toBeVisible()
     await expect(this.passwordField).toBeVisible()
     await expect(this.signInButton).toBeVisible()
+  }
+
+  async checkValidationError(): Promise<void> { // Пример обхода нескольких одинковых элементов
+    await this.usernameField.fill('2');
+    await this.passwordField.fill('2');
+    await expect(this.valError.nth(0)).toBeVisible();
+    await expect(this.valError.nth(1)).toBeVisible()
   }
 }
