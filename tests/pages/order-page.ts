@@ -4,6 +4,7 @@ import { BasePage } from './base-page'
 import { Button } from '../atoms/Button'
 import { NotFoundPage } from './order-not-found-page'
 import { OrderDetailsPage } from './order-details-page'
+import { ENDPOINTS } from '../../utils/endpoints'
 
 export class OrderPage extends BasePage {
   readonly title: Locator
@@ -67,4 +68,19 @@ export class OrderPage extends BasePage {
     await this.searchButton.click()
     return new OrderDetailsPage(this.page)
   }
+
+
+
+  async checkSuccessfullyCreatedPopup(visible = true): Promise<void> {
+    await expect(this.confirmationPopup).toBeVisible({ visible })
+  }
 }
+
+/*
+// test
+  async ordersMocksFallbackExample(): Promise<void> {
+    await this.page.route(`**${ENDPOINTS.ORDERS}/*`, async (route) => {
+      console.log(2)
+    })
+  }
+ */
