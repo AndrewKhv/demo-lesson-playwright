@@ -11,17 +11,18 @@ test.describe('Mocked order flows', async () => {
     await loginPage.open()
     await page.route(`**${ENDPOINTS.STUDENTS}`, async (route) => {
       await route.fulfill({ body: fakeJwt() })
-    });
+    })
     const orderPage = await loginPage.signIn(USERNAME, PASSWORD)
     await page.route(`**${ENDPOINTS.ORDERS}`, async (route) => {
       await route.fulfill({
         status: 200,
         json: TEST_DATA.CREATE_ORDER_RESPONSE,
-        contentType: 'application/json' })
-    });
+        contentType: 'application/json',
+      })
+    })
     await orderPage.createOrder()
-    await orderPage.checkSuccessfullyCreatedPopup();
-  });
+    await orderPage.checkSuccessfullyCreatedPopup()
+  })
 
   test('Mocked order search - found', async ({ page }) => {
     const loginPage = new LoginPage(page)
@@ -52,11 +53,11 @@ test.describe('Mocked order flows', async () => {
 
     await page.route(`**${ENDPOINTS.ORDERS}/*`, async (route) => {
       await route.fulfill({
-        status: 200
+        status: 200,
       })
     })
     const notFoundPage = await orderPage.checkOrderNotFound()
-    await notFoundPage.checkVisible(true);
+    await notFoundPage.checkVisible(true)
   })
 
   test('Mocked server error', async ({ page }) => {
@@ -86,4 +87,3 @@ await page.route(`**${ENDPOINTS.ORDERS}/*`, async route => {
       await route.fallback();
     })
  */
-
