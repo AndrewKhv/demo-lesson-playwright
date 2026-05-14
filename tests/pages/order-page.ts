@@ -67,4 +67,17 @@ export class OrderPage extends BasePage {
     await this.searchButton.click()
     return new OrderDetailsPage(this.page)
   }
+
+  async checkSuccessfullyCreatedPopup(visible = true): Promise<void> {
+    await expect(this.confirmationPopup).toBeVisible({ visible })
+  }
 }
+
+/*
+// test
+  async ordersMocksFallbackExample(): Promise<void> {
+    await this.page.route(`**${ENDPOINTS.ORDERS}/*`, async (route) => {
+      console.log(2)
+    })
+  }
+ */
