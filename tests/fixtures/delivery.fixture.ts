@@ -1,5 +1,5 @@
 import { Page, test as base } from '@playwright/test'
-import { PASSWORD, SERVICE_URL, USERNAME } from '../../config/env-data'
+import { BE_URL, PASSWORD, SERVICE_URL, USERNAME } from '../../config/env-data'
 import { ENDPOINTS } from '../../utils/endpoints'
 import { LoginPage } from '../pages/login-page'
 import { OrderPage } from '../pages/order-page'
@@ -15,7 +15,7 @@ type Fixtures = {
 export const test = base.extend<Fixtures>({
   auth: async ({ request }, use) => {
     console.log('Init: getting jwt')
-    const response = await request.post(`${SERVICE_URL}${ENDPOINTS.STUDENTS}`, {
+    const response = await request.post(`${BE_URL}${ENDPOINTS.STUDENTS}`, {
       data: {
         username: `${USERNAME}`,
         password: `${PASSWORD}`,
@@ -30,7 +30,7 @@ export const test = base.extend<Fixtures>({
   },
 
   orderId: async ({ auth, request }, use) => {
-    const response = await request.post(`${SERVICE_URL}${ENDPOINTS.ORDERS}`, {
+    const response = await request.post(`${BE_URL}${ENDPOINTS.ORDERS}`, {
       data: {
         status: 'OPEN',
         customerName: 'test',
@@ -55,7 +55,7 @@ export const test = base.extend<Fixtures>({
 
     const mainPage = await context.newPage()
 
-    await mainPage.route(`${SERVICE_URL}${ENDPOINTS.ORDERS}/*`, async (route) => {
+    await mainPage.route(`${BE_URL}${ENDPOINTS.ORDERS}/*`, async (route) => {
       if (route.request().method() !== 'GET') {
         await route.continue()
       } else {
@@ -78,13 +78,13 @@ export const test = base.extend<Fixtures>({
     await use(mainPage)
   },
 
-  Login: async ({ page }, use) => {
-    const Login = new LoginPage(page)
+  Login: async ({ mainPage }, use) => {
+    const Login = new LoginPage(mainPage)
     await use(Login)
   },
 
-  Orders: async ({ page }, use) => {
-    const Orders = new OrderPage(page)
+  Orders: async ({ mainPage }, use) => {
+    const Orders = new OrderPage(mainPage)
     await use(Orders)
   },
 })

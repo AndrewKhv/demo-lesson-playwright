@@ -10,7 +10,6 @@ const jwt = fakeJwt()
 
 test.describe('Mocked order flows', () => {
   test('Mocked order creation', async ({ context }) => {
-    console.log(jwt)
     await context.addInitScript((token) => {
       console.log(token)
       localStorage.setItem(
