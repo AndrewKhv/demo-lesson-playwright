@@ -5,7 +5,7 @@ export class OrderDetailsPage extends BasePage {
   readonly details: Locator
 
   constructor(page: Page) {
-    super(page)
+    super(page, '')
     this.details = this.page.locator('.order-details')
   }
 
