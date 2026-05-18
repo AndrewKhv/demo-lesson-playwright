@@ -5,22 +5,17 @@ import { BasePage } from './base-page'
 import { Button } from '../atoms/Button'
 
 export class LoginPage extends BasePage {
-  private readonly url: string = SERVICE_URL
   readonly signInButton: Button
   readonly usernameField: Locator
   readonly passwordField: Locator
   readonly valError: Locator
 
   constructor(page: Page) {
-    super(page)
+    super(page, SERVICE_URL)
     this.signInButton = new Button(page.getByTestId('signIn-button'))
     this.usernameField = page.getByTestId('username-input')
     this.passwordField = page.getByTestId('password-input')
     this.valError = page.getByTestId('username-input-error')
-  }
-
-  async open() {
-    await this.page.goto(this.url)
   }
 
   async signIn(username: string, password: string) {

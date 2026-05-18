@@ -4,6 +4,7 @@ import { BasePage } from './base-page'
 import { Button } from '../atoms/Button'
 import { NotFoundPage } from './order-not-found-page'
 import { OrderDetailsPage } from './order-details-page'
+import { SERVICE_URL } from '../../config/env-data'
 
 export class OrderPage extends BasePage {
   readonly title: Locator
@@ -21,7 +22,7 @@ export class OrderPage extends BasePage {
   readonly searchButton: Button
 
   constructor(page: Page) {
-    super(page)
+    super(page, SERVICE_URL)
     this.title = page.locator('h2')
     this.statusButton = new Button(page.getByTestId('openStatusPopup-button'))
     this.createOrderButton = new Button(page.getByTestId('createOrder-button'))
